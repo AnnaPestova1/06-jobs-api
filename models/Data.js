@@ -2,26 +2,24 @@ const mongoose = require("mongoose");
 
 const DataSchema = new mongoose.Schema(
   {
-    company: {
+    event: {
       type: String,
       enum: [
-        "Banana Republic",
-        "Banana Republic Factory",
-        "Gap",
-        "Gap Factory",
-        "JCrew",
-        "JCrew Factory",
-        "Wayfair"
+        "comet",
+        "asteroid",
+        "meteor shower",
+        "Solar Eclipse",
+        "Lunar Eclipse"
       ]
     },
-    code: {
+    name: {
       type: String,
-      required: [true, "Please provide code"],
+      required: [true, "Please provide name"],
       maxlength: 30
     },
-    expires: {
+    date: {
       type: Date,
-      required: [false, "Please provide expiration date"]
+      required: [false, "Please provide the event date"]
     },
     description: {
       type: String,
