@@ -1,3 +1,6 @@
+I dreamed to do am interesting app to store data about astronomical events, that we can see with naked eyes, like like meteor showers, comets, solar and lunar eclipses, but unfortunately I didn't didn't an API with all the data I need that fits my goals. To do so I need to combine couple APIs (and if I will work with NASA APIs - I'll still have a luck to find all information I want (or I can't figure out where to find it)).
+So I decided to do simple App that will store all my coupons.
+
 #### Setup
 
 ```bash
