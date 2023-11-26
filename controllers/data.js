@@ -1,13 +1,19 @@
+const Data = require("../models/Data");
+const { StatusCodes } = require("http-status-codes");
+const { BadRequestError, NotFoundError } = require("../errors");
+
 const getAllData = async (req, res) => {
   res.send("get all data");
 };
 
 const getData = async (req, res) => {
-  res.send("get single data");
+  res.send("get data");
 };
 
 const createData = async (req, res) => {
-  res.json(req.user);
+  req.body.createdBy = req.user.userId;
+  const data = await Data.create(req.body);
+  res.status(StatusCodes.CREATED).json({ data });
 };
 
 const updateData = async (req, res) => {
