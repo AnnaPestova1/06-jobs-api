@@ -1,3 +1,8 @@
+I dreamed to do an interesting app to store data about astronomical events, that we can see with naked eyes, like meteor showers, comets, solar and lunar eclipses, but unfortunately I didn't find an API with all the data I need. So< this App will contain the data about astronomical events I want to observe and at the end of the project it will send the API request to this API https://ssd-api.jpl.nasa.gov/doc/cad.html (for comets and asteroids) that will provide the info about the closest approach to Earth if the user will enter the right name for object for the period from now to 01/01/2100.
+this request for comet Halley https://ssd-api.jpl.nasa.gov/cad.api?des=1P&date-min=2023-11-25&date-max=2100-01-01&dist-max=1
+
+Another approach - to make API to store my coupons.
+
 #### Setup
 
 ```bash
