@@ -1,0 +1,229 @@
+openapi: 3.0.1
+info:
+  title: Ferret
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://annapestova.onrender.com/api/v1
+    variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: register
+      operationId: register
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/registerrequest"
+            example:
+              name: Anna
+              email: anna@gmail.com
+              password: secret
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: login
+      operationId: login
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/loginrequest"
+            example:
+              email: anna@gmail.com
+              password: secret
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /data:
+    post:
+      tags:
+        - Data
+      summary: create data
+      operationId: createdata
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/createdatarequest"
+            example:
+              event: comet
+              name: C/2023 A3
+              date: ""
+              description: comet Tsuchinshan-ATLAS
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Data
+      summary: get all data
+      operationId: getalldata
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    parameters: []
+  /data/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The data ID
+    get:
+      tags:
+        - Data
+      summary: get single data
+      operationId: getsingledata
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+    patch:
+      tags:
+        - Data
+      summary: update data
+      operationId: updatedata
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/updatedatarequest"
+            example:
+              event: meteor shower
+              name: Gemenids
+              date: ""
+              description: ""
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+    delete:
+      tags:
+        - Data
+      summary: delete data
+      operationId: deletedata
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+components:
+  schemas:
+    registerrequest:
+      title: registerrequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    loginrequest:
+      title: loginrequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    createdatarequest:
+      title: createdatarequest
+      required:
+        - event
+        - name
+        - date
+        - description
+      type: object
+      properties:
+        event:
+          type: string
+        name:
+          type: string
+        date:
+          type: string
+        description:
+          type: string
+    updatedatarequest:
+      title: updatedatarequest
+      required:
+        - event
+        - name
+        - date
+        - description
+      type: object
+      properties:
+        event:
+          type: string
+        name:
+          type: string
+        date:
+          type: string
+        description:
+          type: string
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []

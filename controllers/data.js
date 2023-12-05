@@ -3,11 +3,25 @@ const { StatusCodes } = require("http-status-codes");
 const { BadRequestError, NotFoundError } = require("../errors");
 
 const getAllData = async (req, res) => {
-  res.send("get all data");
+  const data = await Data.find({ createdBy: req.user.userId }).sort(
+    "createdAt"
+  );
+  res.status(StatusCodes.OK).json({ data, count: data.length });
 };
 
 const getData = async (req, res) => {
-  res.send("get data");
+  const {
+    user: { userId },
+    params: { id: dataId }
+  } = req;
+  const data = await Data.findOne({
+    _id: dataId,
+    createdBy: userId
+  });
+  if (!data) {
+    throw new NotFoundError(`No job with id ${dataId}`);
+  }
+  res.status(StatusCodes.OK).json({ data });
 };
 
 const createData = async (req, res) => {
@@ -17,11 +31,41 @@ const createData = async (req, res) => {
 };
 
 const updateData = async (req, res) => {
-  res.send("update data");
+  const {
+    body: { event, name, date, description },
+    user: { userId },
+    params: { id: dataId }
+  } = req;
+  if (event === "" || name === "") {
+    throw new BadRequestError("Event or Name fields cannot be empty");
+  }
+  const data = await Data.findByIdAndUpdate(
+    {
+      _id: dataId,
+      createdBy: userId
+    },
+    req.body,
+    { new: true, runValidators: true }
+  );
+  if (!data) {
+    throw new NotFoundError(`No job with id ${dataId}`);
+  }
+  res.status(StatusCodes.OK).json({ data });
 };
 
 const deleteData = async (req, res) => {
-  res.send("delete data");
+  const {
+    user: { userId },
+    params: { id: dataId }
+  } = req;
+  const data = await Data.findOneAndRemove({
+    _id: dataId,
+    createdBy: userId
+  });
+  if (!data) {
+    throw new NotFoundError(`No job with id ${dataId}`);
+  }
+  res.status(StatusCodes.OK).json();
 };
 
 module.exports = {
