@@ -119,7 +119,7 @@ export const showAddEdit = async (dataId, buttonValue) => {
 
         setDiv(addEditDiv);
       }
-      //   if (method === "DELETE" && response.status === 200) {
+      //   else if (method === "DELETE" && response.status === 200) {
       else if (responseData.msg.includes("deleted")) {
         message.textContent =
           "The information about sky event was successfully deleted";
