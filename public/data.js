@@ -22,7 +22,6 @@ export const handleData = () => {
 
   dataDiv.addEventListener("click", e => {
     if (inputEnabled && e.target.nodeName === "BUTTON") {
-      console.log(e.target.classList);
       if (e.target === addData) {
         showAddEdit(null);
       } else if (e.target === logoff) {
@@ -57,7 +56,6 @@ export const showData = async () => {
     });
 
     const responseData = await response.json();
-    console.log(responseData);
     let children = [dataTableHeader];
     if (response.status === 200) {
       if (responseData.count === 0) {

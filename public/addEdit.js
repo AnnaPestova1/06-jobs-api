@@ -102,12 +102,8 @@ export const showAddEdit = async (dataId, buttonValue) => {
 
       const responseData = await response.json();
       console.log(responseData);
-      if (method === "DELETE" && response.status === 200) {
-        message.textContent =
-          "The information about sky event was successfully deleted";
-        showData();
-      }
-      if (response.status === 200) {
+
+      if (response.status === 200 && responseData.data?.event) {
         let dateValue = "";
         if (responseData.data.date !== null) {
           dateValue = responseData.data.date.slice(0, 10);
@@ -122,6 +118,12 @@ export const showAddEdit = async (dataId, buttonValue) => {
         addEditDiv.dataset.id = dataId;
 
         setDiv(addEditDiv);
+      }
+      //   if (method === "DELETE" && response.status === 200) {
+      else if (responseData.msg.includes("deleted")) {
+        message.textContent =
+          "The information about sky event was successfully deleted";
+        showData();
       } else {
         // might happen if the list has been updated since last display
         message.textContent = "The data entry was not found";
