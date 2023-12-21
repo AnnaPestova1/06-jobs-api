@@ -7,9 +7,9 @@ const DataSchema = new mongoose.Schema(
       enum: [
         "comet",
         "asteroid",
-        "meteor shower",
-        "Solar Eclipse",
-        "Lunar Eclipse"
+        "meteor_shower",
+        "solar_eclipse",
+        "lunar_eclipse"
       ]
     },
     name: {

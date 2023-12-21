@@ -25,6 +25,7 @@ const getData = async (req, res) => {
 };
 
 const createData = async (req, res) => {
+  console.log(req.body);
   req.body.createdBy = req.user.userId;
   const data = await Data.create(req.body);
   res.status(StatusCodes.CREATED).json({ data });
@@ -65,7 +66,7 @@ const deleteData = async (req, res) => {
   if (!data) {
     throw new NotFoundError(`No job with id ${dataId}`);
   }
-  res.status(StatusCodes.OK).json();
+  res.status(StatusCodes.OK).json({ msg: "The entry was deleted." });
 };
 
 module.exports = {
